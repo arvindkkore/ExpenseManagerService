@@ -1,9 +1,12 @@
 package com.example.demo.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class ExpenseEntity {
 
+	public static List<ExpenseEntity> expenses = new ArrayList<>();
 	private long id;
     private String expenseName;
 	private Date expense_date;
@@ -38,6 +41,18 @@ public class ExpenseEntity {
 	}
 	public void setUser(User user) {
 		this.user = user;
+	}
+	
+	public ExpenseEntity(long id, String expenseName, Date expense_date, ExpenseType expenseType) {
+		super();
+		this.id = id;
+		this.expenseName = expenseName;
+		this.expense_date = expense_date;
+		this.expenseType = expenseType;
+	}
+
+	static {
+		
 	}
 	
 	

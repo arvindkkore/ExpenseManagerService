@@ -1,9 +1,20 @@
 package com.example.demo.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Currency {
+	public static List<Currency>  currences = new ArrayList<>();
 	long id;
 	String name;
 	String symbol;
+	
+	public Currency(long id, String name, String symbol) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.symbol = symbol;
+	}
 	public long getId() {
 		return id;
 	}
@@ -23,5 +34,8 @@ public class Currency {
 		this.symbol = symbol;
 	}
 	
-	
+	static {
+		currences.add(new Currency(1,"Indian Rupees","₹"));
+		currences.add(new Currency(2,"Dollor","$"));
+	}
 }
