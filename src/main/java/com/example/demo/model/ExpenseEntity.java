@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class ExpenseEntity {
@@ -18,8 +19,16 @@ public class ExpenseEntity {
 	private long id;
     private String expenseName;
 	private Date expense_date;
-	private ExpenseType expenseType;
+	
+	@ManyToOne
+	private ExpenseType expenseType;	
+	
+	@ManyToOne
 	private UserEntity user;
+	
+	@ManyToOne
+	private Currency currency;
+	
 	private double amount;
 	public long getId() {
 		return id;

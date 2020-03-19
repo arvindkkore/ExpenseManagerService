@@ -1,6 +1,7 @@
 package com.example.demo.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,6 +18,7 @@ private String email;
 private String password;
 private String firstName;
 private String lastName;
+private List<ExpenseEntity> expenses = new ArrayList<ExpenseEntity>();
 public long getId() {
 	return id;
 }
@@ -48,6 +50,18 @@ public void setLastName(String lastName) {
 	this.lastName = lastName;
 }
 
+/**
+ * @return the expenses
+ */
+public List<ExpenseEntity> getExpenses() {
+	return expenses;
+}
+/**
+ * @param expenses the expenses to set
+ */
+public void setExpenses(List<ExpenseEntity> expenses) {
+	this.expenses = expenses;
+}
 public UserEntity(long id, String email, String password, String firstName, String lastName) {
 	super();
 	this.id = id;
