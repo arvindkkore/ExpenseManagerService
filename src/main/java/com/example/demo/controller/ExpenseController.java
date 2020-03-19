@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.model.Currency;
 import com.example.demo.model.ExpenseEntity;
 import com.example.demo.model.ExpenseType;
-import com.example.demo.model.User;
+import com.example.demo.model.UserEntity;
 
 @RestController
 public class ExpenseController {
@@ -32,39 +32,39 @@ public class ExpenseController {
 	
 	//user details 
 	@GetMapping("users")
-	public ResponseEntity<List<User>>  getAllUsers() {			
-        return new ResponseEntity<List<User>>(User.users, new HttpHeaders(), HttpStatus.OK);
+	public ResponseEntity<List<UserEntity>>  getAllUsers() {			
+        return new ResponseEntity<List<UserEntity>>(UserEntity.users, new HttpHeaders(), HttpStatus.OK);
 	}
 	@PostMapping("user/add")
-	public ResponseEntity<User>  registerUser(@RequestBody User user) {
-			user.setId(User.users.size()+1);
-			User.users.add(user);		
-        return new ResponseEntity<User>(user, new HttpHeaders(), HttpStatus.OK);
+	public ResponseEntity<UserEntity>  registerUser(@RequestBody UserEntity user) {
+			user.setId(UserEntity.users.size()+1);
+			UserEntity.users.add(user);		
+        return new ResponseEntity<UserEntity>(user, new HttpHeaders(), HttpStatus.OK);
 	}
 	@PutMapping({"user/edit/{id}", "/edit/{id}"})
-	public ResponseEntity<User>  UpdateUser(@RequestBody User user,@PathVariable("id") long id) {	
+	public ResponseEntity<UserEntity>  UpdateUser(@RequestBody UserEntity user,@PathVariable("id") long id) {	
 		if(user.getId() == 0)
 		{
-			user.setId(User.users.size()+1);
-			User.users.add(user);
+			user.setId(UserEntity.users.size()+1);
+			UserEntity.users.add(user);
 		} else {
-			 Optional<User> op = User.users.stream().filter(t ->t.getId() == user.getId()).findFirst();
+			 Optional<UserEntity> op = UserEntity.users.stream().filter(t ->t.getId() == user.getId()).findFirst();
 			 if(op.isPresent()) {
-				 User user2 = op.get();
+				 UserEntity user2 = op.get();
 				 user2.setFirstName(user.getFirstName());
 				 user2.setEmail(user.getEmail());
 				 user2.setLastName(user.getLastName());
 				 user.setId(user2.getId());
 			 }
 		}
-        return new ResponseEntity<User>(user, new HttpHeaders(), HttpStatus.OK);
+        return new ResponseEntity<UserEntity>(user, new HttpHeaders(), HttpStatus.OK);
 	}
 	@DeleteMapping("user/{id}")
 	public ResponseEntity<Object> deleteUser(@PathVariable("id") long id) {		
-		 Optional<User> op = User.users.stream().filter(t ->t.getId() ==id).findFirst();
+		 Optional<UserEntity> op = UserEntity.users.stream().filter(t ->t.getId() ==id).findFirst();
 		 if(op.isPresent()) {
-			 User user2 = op.get();
-			 User.users.remove(user2);
+			 UserEntity user2 = op.get();
+			 UserEntity.users.remove(user2);
 		 }
         return ResponseEntity.ok("deleted");
 	}
@@ -79,9 +79,9 @@ public class ExpenseController {
 	
 	@PostMapping("user/{userId}/expenses/add")
 	public ResponseEntity<ExpenseEntity> addExpenseForUser(@PathVariable("userId") long userId,@RequestBody ExpenseEntity expenseEntity) {
-		 Optional<User> op = User.users.stream().filter(t ->t.getId() == userId).findFirst();
+		 Optional<UserEntity> op = UserEntity.users.stream().filter(t ->t.getId() == userId).findFirst();
 		 if(op.isPresent()) {
-			 User user2 = op.get();
+			 UserEntity user2 = op.get();
 			 expenseEntity.setUser(user2);
 		 }
 		 ExpenseEntity.expenses.add(expenseEntity);		

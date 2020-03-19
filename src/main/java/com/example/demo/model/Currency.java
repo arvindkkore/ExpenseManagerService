@@ -3,12 +3,24 @@ package com.example.demo.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Generated;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Currency {
 	public static List<Currency>  currences = new ArrayList<>();
-	long id;
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	long id;	
 	String name;
+	
 	String symbol;
 	
+	public Currency() {	}
 	public Currency(long id, String name, String symbol) {
 		super();
 		this.id = id;

@@ -3,17 +3,27 @@ package com.example.demo.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import com.example.demo.repository.TYPE;
+
 public class ExpenseType {
 
 public static List<ExpenseType>  expenseTypes = new ArrayList<>();
+
+@Id
+@GeneratedValue(strategy=GenerationType.AUTO)
 private long id;
+
 private String expenseName;
-private Boolean isCredit;
+private TYPE isCredit;
 public String getExpenseName() {
 	return expenseName;
 }
 
-public ExpenseType(long id,String expenseName, Boolean isCredit) {
+public ExpenseType(long id,String expenseName, TYPE isCredit) {
 	super();
 	this.expenseName = expenseName;
 	this.isCredit = isCredit;
@@ -22,10 +32,10 @@ public ExpenseType(long id,String expenseName, Boolean isCredit) {
 public void setExpenseName(String expenseName) {
 	this.expenseName = expenseName;
 }
-public Boolean getIsCredit() {
+public TYPE getIsCredit() {
 	return isCredit;
 }
-public void setIsCredit(Boolean isCredit) {
+public void setIsCredit(TYPE isCredit) {
 	this.isCredit = isCredit;
 }
 
@@ -38,8 +48,8 @@ public void setId(long id) {
 }
 
 static {
-	expenseTypes.add(new ExpenseType(1,"Rent",false));
-	expenseTypes.add(new ExpenseType(2,"Rent",true));
-	expenseTypes.add(new ExpenseType(3,"Grossory",false));
+	expenseTypes.add(new ExpenseType(1,"Rent",TYPE.CREDIT));
+	expenseTypes.add(new ExpenseType(2,"Rent",TYPE.DEBIT));
+	expenseTypes.add(new ExpenseType(3,"Grossory",TYPE.DEBIT));
 }
 }

@@ -1,9 +1,20 @@
 package com.example.demo.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class UserDefinedExpenseType {
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private long id;
+	
 	private String expenseName;
 	private Boolean isCredit;
-	private User user;
+	private UserEntity user;
 	public String getExpenseName() {
 		return expenseName;
 	}
@@ -16,11 +27,17 @@ public class UserDefinedExpenseType {
 	public void setIsCredit(Boolean isCredit) {
 		this.isCredit = isCredit;
 	}
-	public User getUser() {
+	public UserEntity getUser() {
 		return user;
 	}
-	public void setUser(User user) {
+	public void setUser(UserEntity user) {
 		this.user = user;
+	}
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
 	}
 	
 }
