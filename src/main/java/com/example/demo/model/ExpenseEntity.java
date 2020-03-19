@@ -4,12 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-
+import javax.persistence.*;
+//https://hellokoding.com/jpa-one-to-many-relationship-mapping-example-with-spring-boot-maven-and-mysql/
 @Entity
 public class ExpenseEntity {
 
@@ -19,11 +15,10 @@ public class ExpenseEntity {
 	private long id;
     private String expenseName;
 	private Date expense_date;
-	
+	private long categoryId;
+
 	@ManyToOne
-	private ExpenseType expenseType;	
-	
-	@ManyToOne
+	@JoinColumn(name="id", nullable=false)
 	private UserEntity user;
 	
 	@ManyToOne
@@ -48,11 +43,11 @@ public class ExpenseEntity {
 	public void setExpense_date(Date expense_date) {
 		this.expense_date = expense_date;
 	}
-	public ExpenseType getExpenseType() {
-		return expenseType;
+	public Category getCategory() {
+		return category;
 	}
-	public void setExpenseType(ExpenseType expenseType) {
-		this.expenseType = expenseType;
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 	public UserEntity getUser() {
 		return user;
@@ -66,13 +61,13 @@ public class ExpenseEntity {
 	public void setAmount(double amount) {
 		this.amount = amount;
 	}
-	public ExpenseEntity(long id, String expenseName, Date expense_date,double amount, ExpenseType expenseType) {
+	public ExpenseEntity(long id, String expenseName, Date expense_date,double amount, Category category) {
 		super();
 		this.id = id;
 		this.expenseName = expenseName;
 		this.expense_date = expense_date;
 		this.amount = amount;
-		this.expenseType = expenseType;
+		this.category = category;
 	}
 
 	static {

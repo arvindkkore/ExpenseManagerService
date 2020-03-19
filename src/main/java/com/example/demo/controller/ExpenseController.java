@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -19,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.Currency;
 import com.example.demo.model.ExpenseEntity;
-import com.example.demo.model.ExpenseType;
+import com.example.demo.model.Category;
 import com.example.demo.model.UserEntity;
 
 @RestController
@@ -104,8 +103,8 @@ public class ExpenseController {
 	}
 	
 	@GetMapping("expenseTypes")
-	public ResponseEntity<List<ExpenseType>> getAllExpenseType() {
-        return ResponseEntity.ok(ExpenseType.expenseTypes);
+	public ResponseEntity<List<Category>> getAllExpenseType() {
+        return ResponseEntity.ok(Category.categories);
 	}
 	
 	
